@@ -7,18 +7,21 @@ HUGO_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${
 
 BIN_DIR="bin"
 
-echo "Downloading Hugo ${HUGO_VERSION}..."
-curl -L -o "$HUGO_TAR" "$HUGO_URL"
-
-
-# Step 2: Extract Hugo binary to bin directory
-echo "Extracting Hugo to $BIN_DIR..."
-mkdir -p "$BIN_DIR"
-tar -xzf "$HUGO_TAR" -C "$BIN_DIR"
+# Only fetch and extract Hugo if binary is not present
+if [ ! -f "$BIN_DIR/hugo" ]; then
+	echo "Hugo binary not found in $BIN_DIR. Fetching and extracting..."
+	echo "Running: curl -L -o $HUGO_TAR $HUGO_URL"
+	curl -L -o "$HUGO_TAR" "$HUGO_URL"
+	echo "Running: mkdir -p $BIN_DIR"
+	mkdir -pv "$BIN_DIR"
+	echo "Running: tar -xzf $HUGO_TAR -C $BIN_DIR"
+	tar -xzf "$HUGO_TAR" -C "$BIN_DIR"
+else
+	echo "Hugo binary already exists at $BIN_DIR/hugo. Skipping download and extraction."
+fi
 
 # Step 3: Build Hugo site
-
-echo "Building Hugo site..."
+echo "Running: $BIN_DIR/hugo -s hugo"
 "$BIN_DIR/hugo" -s hugo
 
 echo "Build complete."
