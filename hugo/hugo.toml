@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://dash.asensar.in/sdeploy/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Hugo Site for SDeploy'
 theme='ananke'
