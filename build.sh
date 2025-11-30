@@ -2,7 +2,7 @@
 
 # Step 1: Download Hugo binary
 HUGO_VERSION="0.152.2"
-HUGO_TAR="hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
+HUGO_TAR="hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
 HUGO_URL="https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_TAR}"
 
 BIN_DIR="bin"
