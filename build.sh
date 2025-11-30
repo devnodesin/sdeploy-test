@@ -26,8 +26,8 @@ echo "Running: $BIN_DIR/hugo -s hugo"
 if [ $? -eq 0 ]; then
 	echo "Build complete."
 	baseDir=""
-	echo "Running: rsync -ahWO --no-compress --delete --stats --no-perms --no-owner --no-group .hugo/public/$baseDir/ /server/storage/html/test.domain.in"
-	rsync -ahWO --no-compress --delete --stats --no-perms --no-owner --no-group .hugo/public/$baseDir/ /server/storage/html/test.domain.in
+	echo "Running: rsync -ahWO --no-compress --delete --stats --no-perms --no-owner --no-group hugo/public/$baseDir/ /server/storage/html/test.domain.in"
+	rsync -ahWO --no-compress --delete --stats --no-perms --no-owner --no-group hugo/public/$baseDir/ /server/storage/html/test.domain.in
 else
 	echo "Build failed."
 fi
