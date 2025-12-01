@@ -25,10 +25,12 @@ echo "Running: $BIN_DIR/hugo -s hugo"
 "$BIN_DIR/hugo" -s hugo
 if [ $? -eq 0 ]; then
 	echo "Build complete."
-	echo "Set Onwer: chown -R www-data:www-data hugo/public/"
-	chown -R www-data:www-data hugo/public/
-	echo "Running: rsync -ahWO --no-compress --delete --stats --no-perms --no-owner --no-group hugo/public/$baseDir/ /server/storage/html/test.domain.in"
-	rsync -ahWO --no-compress --delete --stats --no-perms --no-owner --no-group hugo/public/$baseDir/ /server/storage/html/test.domain.in
+	DEPLOY_DIR="/server/storage/html/test.domain.in/"
+	# Step 4: Deploy the site
+	echo "Running: rsync -ahWO --no-compress --delete --stats --no-perms --no-owner --no-group hugo/public/ $DEPLOY_DIR"
+	rsync -ahWO --no-compress --delete --stats --no-perms --no-owner --no-group hugo/public/ $DEPLOY_DIR
+	echo "Set Owner: chown -R www-data:www-data $DEPLOY_DIR"
+	chown -R www-data:www-data $DEPLOY_DIR
 else
 	echo "Build failed."
 fi
